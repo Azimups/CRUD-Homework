@@ -1,0 +1,22 @@
+@model Blogger
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card mb-4 py-3 border-left-primary">
+            <div class="card-body">
+                <img src="~/img/@Model.Image" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card mb-4 py-3 border-left-primary">
+            <div class="card-body">
+                @Model.BloggerSubTitle
+            </div>
+        </div>
+    </div>
+</div>

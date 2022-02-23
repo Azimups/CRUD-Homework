@@ -1,0 +1,42 @@
+@model List<Blogger>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_AdminLayout";
+}
+
+<h2>Blog</h2>
+
+<div class="row">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Blogger Title</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.BloggerTitle</td>
+                        <td>
+                            <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                            <a class="btn btn-success" asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                            <a class="btn btn-danger" asp-action="Delete">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .img-fluid{
+        max-width: 400px;
+        max-height: 300px;
+    }
+</style>

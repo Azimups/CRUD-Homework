@@ -1,0 +1,75 @@
+@model List<BasketViewModel>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@{
+    double TotalPrice = 0;
+    int TotalCount = 0;
+    foreach (var product in Model)
+    {
+        TotalPrice += product.Count * product.Price;
+        TotalCount += product.Count;
+    }
+}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Product ID</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Product Image</th>
+        <th scope="col">Product Price</th>
+        <th scope="col">Product Count</th>
+        <th scope="col">Product TotalPrice</th>
+        <th scope="col">Add Product</th>
+        <th scope="col">Remove Product</th>
+        <th scope="col">Delete Product</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        var productTotalPrice = @product.Count * @product.Price;
+        <tr>
+            <th scope="row">@product.Id</th>
+            <td>@product.Name</td>
+            <td>
+                <img class="product-item" src="~/img/@product.Image"  alt="">
+            </td>
+            <td>@product.Price</td>
+            <td>@product.Count</td>
+            <td>@productTotalPrice</td>
+            <td>
+                <a asp-controller="Home" asp-action="AddProduct" asp-route-id="@product.Id" class="btn btn-primary btn-success">+</a>
+            </td>
+            @if (product.Count==1)
+             {
+                 <style>
+                     .del-btn{
+                        display: none;
+                     }
+                 </style>
+             }
+            <td>
+                <a class="btn btn-primary btn-warning del-btn" asp-controller="Home" asp-action="RemoveProduct" asp-route-id="@product.Id">-</a>
+            </td>
+            <td>
+                <a class="btn btn-primary btn-danger" asp-controller="Home" asp-action="DeleteProduct" asp-route-id="@product.Id">DELETE</a>
+            </td>
+        </tr>
+    }
+    <th scope="col">Total Basket Price</th>
+            <th scope="col">Total Basket Count</th>
+            <tr>
+                <td>@TotalPrice$</td>
+                <td>@TotalCount</td>
+            </tr>
+    </tbody>
+</table>
+<style>
+    .product-item{
+        width: 200px;
+        height: 100px;
+    }
+</style>

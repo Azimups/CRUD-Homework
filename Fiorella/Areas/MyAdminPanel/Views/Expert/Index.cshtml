@@ -1,0 +1,47 @@
+@model List<Expert>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_AdminLayout";
+}
+
+<h2>Experts</h2>
+
+<div class="row">
+    <div class="card-body">
+        <div class="table-responsive">
+            <a class="btn btn-primary" asp-controller="Expert" asp-action="Create">Create</a>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Expert Name</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/img/@item.Image" style="width: 150px; height: 150px;"/>
+                        </td>
+                        <td>@item.Name</td>
+                        <td>
+                            <a class="btn btn-warning" asp-controller="Expert" asp-action="Update" asp-route-id="@item.Id">Update</a>
+                            <a class="btn btn-success" asp-controller="Expert" asp-action="Detail" asp-route-id="@item.Id">Detail</a>
+                            <a class="btn btn-danger" asp-controller="Expert" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .img-fluid{
+        max-width: 150px;
+        max-height: 150px;
+    }
+</style>
